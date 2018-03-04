@@ -1,0 +1,11 @@
+{
+    "name": "app_name",
+    "version": "1",
+    "description": "description",
+    "author": "",
+    "license": "PRIVATE",
+    "private": true,
+    "dependencies": {
+        "dezalgo": "^1.0.3"
+    }
+}

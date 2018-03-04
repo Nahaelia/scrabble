@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+
+  # ---------------------------------------------------------------------------
+  # ----------------------------- MOBI SERVICE --------------------------------
+  # ---------------------------------------------------------------------------
+  codex-service:
+    container_name: app-name
+    # targets the directory with the service Dockerfile
+    build: "./services/app/"
+    restart: always
+    command: python3 -u main.py # runs the app
+    volumes:
+       - './services/app/requirements.txt:/usr/src/app/requirements.txt'
+       - './services/app:/usr/src/app'
+    ports:
+       - '80:80' # expose ports - HOST:CONTAINER
+    networks:
+      dsp-net:
+        ipv4_address: 173.16.0.10
+    environment:
+        - PYTHONUNBUFFERED=1
+        - PYTHON_ENV=development
+        - DEBUG=True
+
+
+networks:
+  dsp-net:
+    driver: bridge
+    ipam:
+      config:
+      - subnet: 173.16.0.0/24
+        gateway: 173.16.0.254
